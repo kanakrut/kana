@@ -1,25 +1,39 @@
-import pygame 
-
+import pygame
+W = 1080
+H = 720  
+WHITE = (255, 255, 255)
+RED = (255, 0, 0)
+ 
 pygame.init()
-black = pygame.Color(0, 0, 0)
-RED = pygame.Color(255, 0, 255)
+game_display = pygame.display.set_mode((W, H))
+clock = pygame.time.Clock()
+ 
 
-gameDisplay = pygame.display.set_mode((600, 600))
-gameDisplay.fill(black)
-pygame.draw.line(gameDisplay, RED, (100, 500), (295, 100), 5)
-pygame.draw.line(gameDisplay, RED, (295, 100), (500, 500), 5)
-pygame.draw.line(gameDisplay, RED, (500, 500), (20, 225), 5)
-pygame.draw.line(gameDisplay, RED, (20, 225), (575, 225), 5)
-pygame.draw.line(gameDisplay, RED, (575, 225), (100, 500), 5)
-pygame.display.set_caption("Ex3")
-def run_game():
-    while True:
-        for event in pygame.event.get():
-            if event.type == pygame.QUIT:
-                pygame.quit()
-                quit()
-        
-        pygame.display.update()
-        
-
-run_game()
+x = W // 2
+y = H // 2
+r = 25
+ 
+while True:
+    game_display.fill(WHITE)
+ 
+    pygame.draw.circle(game_display, RED, (x, y), r)
+    
+    
+    pygame.display.update()
+ 
+    for i in pygame.event.get():
+        if i.type == pygame.QUIT:
+            exit()
+        elif i.type == pygame.KEYDOWN:
+            if i.key == pygame.K_LEFT and x >= 50:
+                x -= 20
+            elif i.key == pygame.K_RIGHT and x <= 1030:
+                x += 20
+            elif i.key == pygame.K_UP and y > 40:
+                y -= 20
+            elif i.key == pygame.K_DOWN and y < 680:
+                y += 20
+            
+            
+ 
+    clock.tick(60)
